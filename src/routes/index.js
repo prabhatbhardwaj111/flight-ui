@@ -7,6 +7,7 @@ const RoutesPage = () => (
     <BrowserRouter>
         <Routes >
             <Route exact path="/" element={<SignIn />} />
+            <Route exact path="/login" element={<SignIn />} />
             <Route exact path="/flights" element={<Flight />} />
         </Routes>
     </BrowserRouter>

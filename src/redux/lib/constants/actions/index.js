@@ -10,4 +10,8 @@ export const FLIGHT = {
     ADDED:'ADDED'
 };
 
+export const UI = {
+    MESSAGE:'MESSAGE'
+}
+
 

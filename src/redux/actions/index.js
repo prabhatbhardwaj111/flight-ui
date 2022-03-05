@@ -1,4 +1,4 @@
-import { LOGIN, FLIGHT } from "../lib/constants/actions";
+import { LOGIN, FLIGHT, UI } from "../lib/constants/actions";
 import { FLIGHTS_ADD } from "../lib/constants/api-urls";
 
 export const tryLogin = (data) => {
@@ -43,6 +43,13 @@ export const addFlights = (data) => {
 export const flightAdded = (data) => {
     return {
         type: FLIGHT.ADDED,
+        payload: data
+    }
+}
+
+export const showMessages = (data) => {
+    return {
+        type: UI.MESSAGE,
         payload: data
     }
 }

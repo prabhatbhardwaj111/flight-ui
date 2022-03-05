@@ -14,7 +14,9 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { connect } from 'react-redux';
 import { tryLogin } from '../../redux/actions';
-import {useNavigate} from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import Alert from '@mui/material/Alert';
+
 const theme = createTheme();
 
 const SignIn = (props) => {
@@ -29,14 +31,20 @@ const SignIn = (props) => {
     });
   };
 
-  React.useEffect(()=>{
+  React.useEffect(() => {
 
-    
-    if(props.loginData && props.loginData.access_token){
+
+    if (props.loginData && props.loginData.access_token) {
       navigate('/flights')
     }
-  },[props.loginData])
+  }, [props.loginData])
+
+
+
   
+
+
+  console.log('==', props.message);
   return (
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
@@ -49,9 +57,15 @@ const SignIn = (props) => {
             alignItems: 'center',
           }}
         >
+          {(props.message) ?
+            <Alert severity={(props.message.status == 200 || props.message.status == 201) ? 'success' : 'error'}>{props.message.message}</Alert>
+            : ''
+          }
+
           <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
             <LockOutlinedIcon />
           </Avatar>
+
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>
@@ -95,7 +109,8 @@ const SignIn = (props) => {
 }
 
 const mapStateToProps = (state) => ({
-  loginData: (state.demoReducer && state.demoReducer.loginData)?state.demoReducer.loginData:{}
+  loginData: (state.demoReducer && state.demoReducer.loginData) ? state.demoReducer.loginData : {},
+  message: (state.demoReducer && state.demoReducer.message) ? state.demoReducer.message : null
 });
 const mapDispatchToProps = (dispatch) => ({
   login: (filter) => dispatch(tryLogin(filter)),

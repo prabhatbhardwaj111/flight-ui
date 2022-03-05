@@ -1,10 +1,12 @@
+export const API_BASE_URL = 'http://localhost:8080';
+
 export const LOGIN = {
-    URL: `http://localhost:8080/login`,
+    URL: `${API_BASE_URL}/login`,
 };
 export const FLIGHTS = {
-    URL: `http://localhost:8080/flight-list`,
+    URL: `${API_BASE_URL}/flight-list`,
 };
 
 export const FLIGHTS_ADD = {
-    URL: `http://localhost:8080/add-flight`,
+    URL: `${API_BASE_URL}/add-flight`,
 };

@@ -5,6 +5,8 @@ import { connect } from 'react-redux';
 import { fetchFlights } from '../../redux/actions';
 import Button from '@mui/material/Button';
 import CustomizedDialogs from '../../components/dialog';
+import Alert from '@mui/material/Alert';
+
 const Flight = (props) => {
     const columns = ["from", "to", "departureTime", "landingTime", "price"];
     const [count, setCount] = React.useState(0);
@@ -25,7 +27,8 @@ const Flight = (props) => {
 
     React.useEffect(() => {
         if (props.flightAdded && props.flightAdded.data) {
-            props.fetchFlights({});
+            data.push(props.flightAdded.data);
+            setData(data);
         }
     }, [props.flightAdded]);
 
@@ -38,6 +41,10 @@ const Flight = (props) => {
 
     return (
         <Layout title={'Flights'}>
+            {(props.message) ?
+                <Alert severity={(props.message.status == 200 || props.message.status == 201) ? 'success' : 'error'}>{props.message.message}</Alert>
+                : ''
+            }
             <div>
                 <CustomizedDialogs />
                 <MUIDataTable
@@ -52,7 +59,8 @@ const Flight = (props) => {
 
 const mapStateToProps = (state) => ({
     flightData: (state.demoReducer && state.demoReducer.flightData) ? state.demoReducer.flightData : [],
-    flightAdded: (state.demoReducer && state.demoReducer.flightAdded) ? state.demoReducer.flightAdded : null
+    flightAdded: (state.demoReducer && state.demoReducer.flightAdded) ? state.demoReducer.flightAdded : null,
+    message: (state.demoReducer && state.demoReducer.message) ? state.demoReducer.message : null
 });
 
 const mapDispatchToProps = (dispatch) => ({
